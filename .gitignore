@@ -1,0 +1,7 @@
+### Node Modules ###
+./node_modules/
+node_modules/
+### File where is stored Discord bot token ###
+### REMEMBER NEVER COMMIT A DISCORD BOT TOKEN ###
+.env
+./.env
