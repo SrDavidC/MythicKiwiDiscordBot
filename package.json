@@ -11,9 +11,11 @@
   "license": "ISC",
   "dependencies": {
     "@discordjs/rest": "^1.5.0",
+    "amrhextotext": "^1.1.1",
     "chalk": "^4.1.2",
     "discord-api-types": "^0.37.31",
     "discord.js": "^14.7.1",
-    "dotenv": "^16.0.3"
+    "dotenv": "^16.0.3",
+    "makestruct": "^1.2.9"
   }
 }
