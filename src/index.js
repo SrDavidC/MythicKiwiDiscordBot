@@ -1,6 +1,6 @@
 require('dotenv').config();
 const { token } = process.env;
-const { Client, Collection, GatewayIntentBits } = require('discord.js');
+const { Client, Collection, GatewayIntentBits, Message } = require('discord.js');
 const fs = require('fs');
 const client = new Client({
     intents: [
@@ -12,18 +12,6 @@ const client = new Client({
 });
 client.commands = new Collection();
 /**Default data**/
-
-client.on('message', (message) => {
-  console.log(message.content)
-  if (message.author.bot) return;
-  if (!(message.content.startsWith(client.commandPrefix))) return;
-  const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
-  const command = args.shift().toLowerCase();
-  if(command ==="pef"){
-      message.channel.send(":yum: :yum:")
-  }
-});
-
 
 client.commandArray = [];
 client.embedDefaultColor = '#3EDDF6';
