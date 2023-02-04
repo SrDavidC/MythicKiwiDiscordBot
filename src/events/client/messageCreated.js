@@ -6,6 +6,6 @@ module.exports = {
         console.log(message.content);
         if (message.author.bot) return;
         /* Prefix commands handler */
-        prefixCommandsHandler.handlePrefix(message);
+        prefixCommandsHandler.handlePrefix(message, client);
     }
 }

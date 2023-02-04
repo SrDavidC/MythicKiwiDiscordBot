@@ -1,7 +1,7 @@
 const say = require('./prefix_commands/tools/say')
 const fs = require('fs');
 
-module.exports.handlePrefix = (message) => {
+module.exports.handlePrefix = (message, client) => {
     let prefix = process.env.prefix
     console.log(prefix);
     if (!message.content.startsWith(prefix)) return;
@@ -18,7 +18,7 @@ module.exports.handlePrefix = (message) => {
                 .toLocaleLowerCase();
             if (filename === commandSent) {
                 let command = require(`./prefix_commands/${folder}/${filename}`);
-                command.execute(message, args);
+                command.execute(message, args, client);
             }
         }
     }
