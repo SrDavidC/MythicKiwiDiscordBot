@@ -3,7 +3,7 @@ const fs = require('fs');
 
 module.exports.handlePrefix = (message, client) => {
     let prefix = process.env.prefix
-    console.log(prefix);
+    // console.log(prefix);
     if (!message.content.startsWith(prefix)) return;
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const commandSent = args.shift().toLowerCase();

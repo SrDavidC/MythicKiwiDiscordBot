@@ -5,14 +5,14 @@ const ticketSchema = require("../../Models/ticket");
 
 module.exports = {
     name: "interactionCreate",
-
+    once: false,
     async execute(interaction) {
-        const {guild, member, customID, channel} = interaction;
+        const {guild, member, customId, channel} = interaction;
         const {ManageChannels, SendMessages} = PermissionFlagsBits;
 
         if(!interaction.isButton()) return;
 
-        if(!["close", "lock", "unlock"].includes(customID)) return;
+        if(!["close", "lock", "unlock"].includes(customId)) return;
 
         if(!guild.members.me.permissions.has(ManageChannels))
             return interaction.reply({content: "I don't have permissions for this.", ephemeral: true});
@@ -24,7 +24,7 @@ module.exports = {
             if (!data) return;
 
             const fetchedMember = await guild.members.cache.get(data.MemberID);
-            switch (customID) {
+            switch (customId) {
                 case "close":
                     if (data.closed == true)
                         return interaction.reply({ content: "Ticket is already getting closed!", ephemeral: true});
@@ -46,6 +46,7 @@ module.exports = {
                         .setDescription("Ticket will be closed in 10 seconds, enable DM's for the ticket transcript")
                         .setFooter({ text: member.user.tag, iconURL: member.displayAvatarURL({ dynamic: true})})
                         .setTimestamp();
+                    channel.permissionOverwrites.edit(fetchedMember, { SendMessages: false});
                     const res = await guild.channels.cache.get(transcripts).send({
                         embeds: [transcriptEmbed],
                         files: [transcript],
