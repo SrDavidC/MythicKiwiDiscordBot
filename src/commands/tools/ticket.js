@@ -17,7 +17,11 @@ module.exports = {
                 new ButtonBuilder().setCustomId('help').setLabel('Help').setStyle(ButtonStyle.Secondary).setEmoji('❓'),
                 new ButtonBuilder().setCustomId('partnership').setLabel('Partnership').setStyle(ButtonStyle.Success).setEmoji('🤝')
             );
+                if (guild.channels.cache.get(openticket)) {
 
+                } else {
+                    console.log("Channel DOESNT exist");
+                }
             await guild.channels.cache.get(openticket).send({
                 embeds: ([embed]),
                 components: [
