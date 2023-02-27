@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder, MessageEmbed } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const request = require("request");
 
 function random(colors) {

@@ -8,8 +8,10 @@ const client = new Client({
       GatewayIntentBits.GuildMessages,
       GatewayIntentBits.MessageContent,
       GatewayIntentBits.GuildMembers,
+      GatewayIntentBits.GuildVoiceStates
   ],
 });
+const { Player } = require('discord-player');
 client.commands = new Collection();
 /**Default data**/
 
@@ -31,4 +33,12 @@ for (const folder of functionFolders) {
 
 client.handleEvents();
 client.handleCommands();
+
+client.player = new Player(client, {
+  ytdlOptions: {
+      quality: "highestaudio",
+      highWaterMark: 1 << 25
+  }
+})
+
 client.login(token);
