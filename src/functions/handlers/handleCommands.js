@@ -1,5 +1,6 @@
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
+const { guild_ids } = require("../../../config.json");
 const fs = require('fs');
 
 module.exports = (client) => {
@@ -18,21 +19,20 @@ module.exports = (client) => {
               "through the handler");
             }
         }
-        
-        const clientID = '1070460205755801640';
-        const guildID = process.env.guildID1; 
+        const clientID = process.env.clientid;
         const rest = new REST({version: '9'}).setToken(process.env.token);
-        try {
-          console.log("Started refreshing application (/) commands.");
-        
-          await rest.put(Routes.applicationGuildCommands(clientID, guildID), {
-            body: client.commandArray,
-          });
-          console.log("Successfuly reloaded application (/) commands");
-        } catch (error) {
-          console.error(error);
+        for (const guildId of guild_ids) {
+          try {
+            console.log("Started refreshing application (/) commands for guild " + guildId);
+            await rest.put(Routes.applicationGuildCommands(clientID, guildId), {
+              body: client.commandArray,
+            });
+
+            console.log("Successfuly reloaded application (/) commands for guild " + guildId);
+          } catch (error) {
+            console.error(error);
+          }
         }
-    
       };
 };
 

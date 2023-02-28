@@ -19,19 +19,19 @@ module.exports = {
 				.setName("playlist")
 				.setDescription("Plays a playlist from YT")
 				.addStringOption(option => option.setName("url").setDescription("the playlist's url").setRequired(true))
-		)
-		.addSubcommand(subcommand =>
-			subcommand
-				.setName("song")
-				.setDescription("Plays a single song from YT")
-				.addStringOption(option => option.setName("url").setDescription("the song's url").setRequired(true))
 		),
         async execute(interaction, client) {
         // Make sure the user is inside a voice channel
 		if (!interaction.member.voice.channel) return interaction.reply("You need to be in a Voice Channel to play a song.");
 
         // Create a play queue for the server
-		const queue = await client.player.createQueue(interaction.guild);
+        var queue;
+        if( !(client.player.getQueue(interaction.guildId))) {
+            queue = await client.player.createQueue(interaction.guild);
+        } else {
+            queue = await client.player.getQueue(interaction.guildId);
+        }
+		    
 
         // Wait until you are connected to the channel
 		if (!queue.connection) await queue.connect(interaction.member.voice.channel)

@@ -18,17 +18,19 @@ module.exports = {
             return;
         }
 
-        const currentSong = queue.current
+        // const currentSong = queue.current
 
         // Skip the current song
-		queue.skip()
+		//queue.skip();
+        client.player.skip(interaction.guildId);
+        
 
         // Return an embed to the user saying the song has been skipped
         await interaction.reply({
             embeds: [
                 new EmbedBuilder()
-                    .setDescription(`${currentSong.title} has been skipped!`)
-                    .setThumbnail(currentSong.thumbnail)
+                    .setDescription(`A song has been skipped!`)
+                    // .setThumbnail(currentSong.thumbnail)
             ]
         })
 	},
