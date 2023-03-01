@@ -1,5 +1,6 @@
 require('dotenv').config();
 const { token } = process.env;
+const { DisTube } = require('distube')
 const { Client, Collection, GatewayIntentBits,  } = require('discord.js');
 const fs = require('fs');
 const client = new Client({
@@ -12,7 +13,26 @@ const client = new Client({
   ],
 });
 const { Player } = require('discord-player');
+const { SpotifyPlugin } = require('@distube/spotify')
+const { SoundCloudPlugin } = require('@distube/soundcloud')
+const { YtDlpPlugin } = require('@distube/yt-dlp')
+client.distube = new DisTube(client, {
+  leaveOnStop: false,
+  emitNewSongOnly: true,
+  emitAddSongWhenCreatingQueue: false,
+  emitAddListWhenCreatingQueue: false,
+  plugins: [
+    new SpotifyPlugin({
+      emitEventsAfterFetching: true
+    }),
+    new SoundCloudPlugin(),
+    new YtDlpPlugin()
+  ]
+})
+// "../../../config.json"
+client.config = require("../config.json");
 client.commands = new Collection();
+client.emotes = client.config.emoji;
 /**Default data**/
 
 client.commandArray = [];
@@ -33,6 +53,7 @@ for (const folder of functionFolders) {
 
 client.handleEvents();
 client.handleCommands();
+client.handleMusicEvents();
 
 client.player = new Player(client, {
   ytdlOptions: {

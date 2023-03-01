@@ -12,7 +12,7 @@ module.exports = {
             }catch(error) {
                 console.error(error);
                 await interaction.reply({
-                    content: `Oops! Something went wrong while execution this command....`,
+                    content: `Oops! Algo malo pasó ejecutando ese comando....`,
                     ephemeral: true
                 });
             }

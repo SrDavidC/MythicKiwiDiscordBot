@@ -1,6 +1,38 @@
-const { SlashCommandBuilder } = require("@discordjs/builders")
+const { SlashCommandBuilder } = require("@discordjs/builders");
+const { Embed, EmbedBuilder } = require("discord.js");
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName("play")
+		.setDescription("play a song from YouTube.")
+        .addStringOption(option =>
+            option.setName("song").setDescription("Song to play").setRequired(true)
+        ),
+        async execute(interaction, client) {
+            await interaction.deferReply({ ephemeral: false });
+            // await interaction.reply("Working on it...🔍");
+            const embed = new EmbedBuilder()
+                // .setColor(client.color)
+                .setTimestamp();
+            if (!interaction.member.voice.channel) {
+                embed.setDescription(`\`❌\` | Debes de estar en un canal de voz para usar este comando.`)
+
+                return interaction.editReply({ embeds: [embed] });
+            } 
+            let song = interaction.options.getString("song")
+            client.distube.play(interaction.member.voice.channel, song, {
+                member: interaction.member,
+                textChannel: interaction.channel,
+                metadata: { interaction: interaction}
+            })
+            
+        }
+}
+
+/*const { SlashCommandBuilder } = require("@discordjs/builders")
 const { EmbedBuilder } = require("discord.js")
 const { QueryType } = require("discord-player")
+
+
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -112,6 +144,7 @@ module.exports = {
         await interaction.reply({
             embeds: [embed]
         })
-        */
+        
 	},
 }
+*/
