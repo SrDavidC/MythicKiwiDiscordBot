@@ -3,7 +3,7 @@ const { Embed, EmbedBuilder } = require("discord.js");
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("play")
-		.setDescription("play a song from YouTube.")
+		.setDescription("Reproduce una canción de YT, Spotify, Deezer, entre otros")
         .addStringOption(option =>
             option.setName("song").setDescription("Song to play").setRequired(true)
         ),

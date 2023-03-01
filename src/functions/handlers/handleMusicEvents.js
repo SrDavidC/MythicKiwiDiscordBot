@@ -3,6 +3,25 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("
 
 module.exports = (client) => {
     client.handleMusicEvents = async () => {
+        
+        const PauseButton = new ButtonBuilder()
+        .setCustomId('PauseButton')
+        .setLabel('Pause')
+        .setStyle(ButtonStyle.Secondary)
+        .setEmoji('⏸️');
+        const StopButton = new ButtonBuilder()
+        .setCustomId('StopButton')
+        .setLabel('Stop')
+        .setStyle(ButtonStyle.Secondary)
+        .setEmoji('⏹️');
+        const SkipButton = new ButtonBuilder()
+        .setCustomId('SkipButton')
+        .setLabel('Skip')
+        .setStyle(ButtonStyle.Secondary)
+        .setEmoji('⏹️');
+
+        const Buttons = new ActionRowBuilder().addComponents(PauseButton, SkipButton, StopButton);
+        
         const status = queue =>
             `Volume: \`${queue.volume}%\` | Filter: \`${queue.filters.names.join(', ') || 'Off'}\` | Loop: \`${queue.repeatMode ? (queue.repeatMode === 2 ? 'All Queue' : 'This Song') : 'Off'
             }\` | Autoplay: \`${queue.autoplay ? 'On' : 'Off'}\``
@@ -14,16 +33,9 @@ module.exports = (client) => {
                         { name: 'Duración', value: "```" + song.formattedDuration + "```"/* song.formattedDuration */, inline: true },
                         { name: 'Autor', value: "```" + song.uploader.name + "```" /*song.uploader*/, inline: true })
                     .setImage(song.thumbnail);
-
-                const row = new ActionRowBuilder().addComponents(
-                    new ButtonBuilder().setCustomId('pause').setLabel('Pause').setStyle(ButtonStyle.Secondary),
-                    new ButtonBuilder().setCustomId('skip').setLabel('Skip').setStyle(ButtonStyle.Secondary),
-                    new ButtonBuilder().setCustomId('stop').setLabel('Stop').setStyle(ButtonStyle.Secondary),
-                    );
-
                 song.metadata.interaction.editReply({
                     embeds: [embed],
-                    components: [row],
+                    components: [Buttons],
                 })
             })
             .on('addSong', (queue, song) => {
