@@ -48,20 +48,19 @@ module.exports = (client) => {
                     components: [],
                 })
             })
-            .on('addList', (queue, playlist) =>
-                queue.textChannel.send(
-                    `${client.emotes.success} | Added \`${playlist.name}\` playlist (${playlist.songs.length
-                    } songs) to queue\n${status(queue)}`
-                )
-            )
-            .on('error', (channel, e) => {
-                if (channel) channel.send(`${client.emotes.error} | An error encountered: ${e.toString().slice(0, 1974)}`)
-                else console.error(e)
+            .on('addList', (queue, playlist) => {
+                const embed = new EmbedBuilder()
+                    .setDescription(` <:verified_white:1080337342058995722>  | Playlist añadida: **${playlist.name}**`);
+                song.metadata.interaction.editReply({ embeds: [embed] });
             })
-            .on('empty', channel => channel.send('Voice channel is empty! Leaving the channel...'))
+            // .on('error', (channel, e) => {
+                //if (channel) channel.send(`${client.emotes.error} | An error encountered: ${e.toString().slice(0, 1974)}`)
+             //*   else console.error(e)
+           // })
+            // .on('empty', channel => channel.send('Voice channel is empty! Leaving the channel...'))
             .on('searchNoResult', (message, query) =>
                 message.channel.send(`${client.emotes.error} | No result found for \`${query}\`!`)
             )
-            .on('finish', queue => queue.textChannel.send('Finished!'))
+            // .on('finish', queue => queue.textChannel.send('Finished!'))
     }
 }

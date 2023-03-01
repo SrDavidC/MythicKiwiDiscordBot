@@ -33,6 +33,7 @@ client.distube = new DisTube(client, {
 client.config = require("../config.json");
 client.commands = new Collection();
 client.emotes = client.config.emoji;
+client.color = client.config.client_color
 /**Default data**/
 
 client.commandArray = [];

@@ -68,7 +68,7 @@ module.exports = {
             case "SkipButton":
                 if (client.distube.getQueue(guild).songs.length > 1) {
                     client.distube.skip(guild);
-                    await interaction.channel.send({ embeds: [new EmbedBuilder().setDescription("<:SilverVerify:1080373622234943539>  | Canción actual saltada")] });
+                    await interaction.reply({ embeds: [new EmbedBuilder().setDescription("<:SilverVerify:1080373622234943539>  | Canción actual saltada")], ephemeral: true });
                 } else {
                     client.distube.stop(guild);
                     await interaction.channel.send({ embeds: [new EmbedBuilder().setDescription("<:SilverVerify:1080373622234943539>  | Canción actual saltada, no hay más canciones en la lista")] })
