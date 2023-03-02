@@ -24,7 +24,7 @@ module.exports = {
                 textChannel: interaction.channel,
                 metadata: { interaction: interaction}
             })
-            
+            interaction.editReply("Enviadaa!");
         }
 }
 

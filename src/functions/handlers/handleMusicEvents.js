@@ -51,7 +51,7 @@ module.exports = (client) => {
             .on('addList', (queue, playlist) => {
                 const embed = new EmbedBuilder()
                     .setDescription(` <:verified_white:1080337342058995722>  | Playlist añadida: **${playlist.name}**`);
-                song.metadata.interaction.editReply({ embeds: [embed] });
+                playlist.metadata.interaction.editReply({ embeds: [embed] });
             })
             // .on('error', (channel, e) => {
                 //if (channel) channel.send(`${client.emotes.error} | An error encountered: ${e.toString().slice(0, 1974)}`)
