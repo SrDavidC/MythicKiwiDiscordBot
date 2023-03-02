@@ -9,18 +9,18 @@ module.exports = {
 
     async execute(interaction, client) {
         await interaction.deferReply({ ephemeral: false });
+        // check if there are songs in the queue
         const queue = client.distube.getQueue(interaction.guild);
+        if (!queue || !queue.playing) {
+            await interaction.editReply(`${client.emotes.error} | No existe ninguna cola ahora mismo!`);
+            return;
+        }
         const npSong = queue.songs[0];
         const currentDuration = npSong.formattedDuration;
         const currentTitle = npSong.name > 20 ? npSong.title.substr(0, 20) + "..." : npSong.name;
         const npDuration = npSong.isLive ? "LIVE" : currentDuration;
         const npTitle = npSong.name ? currentTitle : "Unknown";
         const firstsSongs = queue.songs.length > 5 ? queue.songs.slice(0, 5) : queue.songs;
-        // check if there are songs in the queue
-        if (!queue || !queue.playing) {
-            await interaction.reply("There are no songs in the queue");
-            return;
-        }
 
         const embed = new EmbedBuilder()
             .setAuthor({ name: `Queue List`, iconURL: interaction.guild.iconURL({ dynamic: true }) })
