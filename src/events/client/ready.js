@@ -1,7 +1,5 @@
-const { config } = require("../../../config.json");
 const { default: mongoose } = require("mongoose");
-const { mongodb } = require("../../../config.json");
-const { guild_ids } = require("../../../config.json");
+const { mongodb } = process.env;
 
 module.exports = {
     name: 'ready',

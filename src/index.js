@@ -40,7 +40,7 @@ client.commandArray = [];
 client.embedDefaultColor = '#3EDDF6';
 client.storeURL = `https://kiwiland.tebex.io/`;
 client.serverIP = "MythicKiwi.net"
-client.commandPrefix = "!";
+client.commandPrefix = client.config.prefix;
 client.serverName = "MythicKiwi";
 
  /*Reading information*/ 

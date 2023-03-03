@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { Embed, EmbedBuilder } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("play")
@@ -8,7 +8,7 @@ module.exports = {
             option.setName("song").setDescription("Song to play").setRequired(true)
         ),
         async execute(interaction, client) {
-            await interaction.deferReply({ ephemeral: false });
+            await interaction.deferReply({ ephemeral: true });
             // await interaction.reply("Working on it...🔍");
             const embed = new EmbedBuilder()
                 // .setColor(client.color)
@@ -23,6 +23,6 @@ module.exports = {
                 textChannel: interaction.channel,
                 metadata: { interaction: interaction, channel: interaction.channel}
             })
-            interaction.editReply("Enviadaa!");
+            interaction.editReply(`${client.config.emoji.success} | Búsqueda encontrada!`);
         }
 }

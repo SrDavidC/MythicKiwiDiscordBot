@@ -1,8 +1,7 @@
-const say = require('./prefix_commands/tools/say')
 const fs = require('fs');
 
 module.exports.handlePrefix = (message, client) => {
-    let prefix = process.env.prefix
+    let prefix = client.prefix; 
     // console.log(prefix);
     if (!message.content.startsWith(prefix)) return;
     const args = message.content.slice(prefix.length).trim().split(/ +/g);

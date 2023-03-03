@@ -10,17 +10,22 @@ module.exports = (client) => {
             },
             {
                 type: ActivityType.Watching,
-                text: "offers on the store",
+                text: "mythic comissions",
                 status: "online"
             },
             {
                 type: ActivityType.Custom,
-                text: "harvesting mythic kiwis",
+                text: "improving premade content ",
                 status: "online"
             },
             {
-                type: ActivityType.Playing,
-                text: "MythicKiwi.net",
+                type: ActivityType.Custom,
+                text: "waitng the next customer",
+                status: "online"
+            },
+            {
+                type: ActivityType.Listening,
+                text: "a excelent customer",
                 status: "online"
             }
         ];
