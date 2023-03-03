@@ -15,7 +15,6 @@ module.exports = {
             .setLabel('Pause')
             .setStyle(ButtonStyle.Secondary)
             .setEmoji('⏸️');
-        console.log("yes1");
         const ResumeButton = new ButtonBuilder()
             .setCustomId('ResumeButton')
             .setLabel('Resume')
