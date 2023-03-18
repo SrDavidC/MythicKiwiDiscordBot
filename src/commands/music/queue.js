@@ -32,7 +32,7 @@ module.exports = {
                 iconURL: interaction.user.displayAvatarURL({ dynamic: true }),
             })
             .setTimestamp();
-        console.log(firstsSongs.length);
+        // console.log(firstsSongs.length);
         if (firstsSongs.length) {
             embed.addFields([
                 {

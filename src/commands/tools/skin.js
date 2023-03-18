@@ -9,24 +9,24 @@ function random(colors) {
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('skin')
-        .setDescription('Returns skin of a minecraft user')
+        .setDescription('Retorna la skin de un usuario premium de Minecraft')
         .addStringOption(option =>
             option
                 .setName("username")
-                .setDescription("username to get minecraft skin")
+                .setDescription("username del jugador")
                 .setRequired(true))
     , async execute(interaction, client) {
         const username = interaction.options.getString('username');
         if (username.length > 16) {
             await interaction.reply({
-                content: 'Minecraft usernames have less than 16 characters!'
+                content: 'Los username de Minecraft deben ser de menos de 16 caracteres'
             });
         }
         let mojang_player_api = `https://api.mojang.com/users/profiles/minecraft/${username}`;
         request(mojang_player_api, async function (err, resp, body) {
             if (err) {
                 interaction.reply({
-                    content: `Username: **${nombre}** is not a premium user`
+                    content: `Username: **${username}** is not a premium user`
                 });
             }
             try {
@@ -45,7 +45,7 @@ module.exports = {
                 await interaction.reply('Skin has been sent succesfully');
             } catch (err) {
                 interaction.reply({
-                    content: 'An error was occurred'
+                    content: `Hubo un error. Es probable que **${username}** no sea un usuario premium`
                 });
                 console.log(err);
             }

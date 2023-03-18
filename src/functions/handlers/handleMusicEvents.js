@@ -48,8 +48,9 @@ module.exports = (client) => {
             .on('finishSong', (queue, song) => {
                 // console.log(song.metadata.message.con());
                 song.metadata.message.edit({
-                    components: [],
+                   components: [],
                 })
+                // console.log("cancion finish");
             })
             .on('addList', (queue, playlist) => {
                 const embed = new EmbedBuilder()

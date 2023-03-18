@@ -12,7 +12,7 @@ module.exports = {
         const ticketID = Math.floor(Math.random() * 9000) + 10000;
 
         if (!interaction.isButton()) return;
-        console.log(customId);
+        // console.log(customId);
         if (!["ticket_button_1", 'ticket_button_2', 'ticket_button_3'].includes(customId)) return;
         if (!guild.members.me.permissions.has(ManageChannels))
             interaction.reply({ content: "No tengo permisos para crear canales (Permissions.ManageChannels).", ephemeral: true });
