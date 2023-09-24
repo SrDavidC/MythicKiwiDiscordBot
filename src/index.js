@@ -16,6 +16,7 @@ const { Player } = require('discord-player');
 const { SpotifyPlugin } = require('@distube/spotify')
 const { SoundCloudPlugin } = require('@distube/soundcloud')
 const { YtDlpPlugin } = require('@distube/yt-dlp')
+const { DeezerPlugin } = require("@distube/deezer");
 client.distube = new DisTube(client, {
   leaveOnStop: false,
   emitNewSongOnly: true,
@@ -26,7 +27,8 @@ client.distube = new DisTube(client, {
       emitEventsAfterFetching: true
     }),
     new SoundCloudPlugin(),
-    new YtDlpPlugin()
+    new YtDlpPlugin(),
+    new DeezerPlugin()
   ]
 })
 // "../../../config.json"
@@ -62,5 +64,5 @@ client.player = new Player(client, {
       highWaterMark: 1 << 25
   }
 })
-
+console.log(token)
 client.login(token);
